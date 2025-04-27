@@ -1,6 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
 import styles from "./ContactForm.module.css";
 
 const validationSchema = Yup.object({
@@ -15,18 +17,20 @@ const validationSchema = Yup.object({
 });
 
 const initialValues = {
-  username: "",
-  usernumber: "",
+  name: "",
+  number: "",
 };
 
-const ContactForm = ({ onAddContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values, { resetForm }) => {
         const newContact = { ...values, id: nanoid() };
-        onAddContact(newContact);
+        dispatch(addContact(newContact));
         resetForm();
       }}
     >
@@ -37,6 +41,7 @@ const ContactForm = ({ onAddContact }) => {
             className={styles.field}
             type="text"
             name="name"
+            id="name"
             placeholder="Enter name"
           />
           <ErrorMessage name="name" component="div" className={styles.error} />
@@ -48,7 +53,8 @@ const ContactForm = ({ onAddContact }) => {
             className={styles.field}
             type="text"
             name="number"
-            placeholder="enter phone number"
+            id="number"
+            placeholder="Enter phone number"
           />
           <ErrorMessage
             name="number"
