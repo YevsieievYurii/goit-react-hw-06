@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import "./App.css";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
 import { addContact, deleteContact } from "./redux/contactsSlice";
-import { changeFilter } from "./redux/filterSlice";
+import { changeFilter } from "./redux/filtersSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,12 +29,6 @@ const App = () => {
   const handleFilterChange = (filterValue) => {
     dispatch(changeFilter(filterValue));
   };
-
-  useEffect(() => {
-    if (contacts.length > 0) {
-      localStorage.setItem("contacts", JSON.stringify(contacts));
-    }
-  }, [contacts]);
 
   return (
     <div className="appContainer">
