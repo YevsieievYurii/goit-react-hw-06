@@ -32,15 +32,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    const savedContacts = JSON.parse(localStorage.getItem("contacts"));
-    if (savedContacts && Array.isArray(savedContacts)) {
-      savedContacts.forEach((contact) => {
-        dispatch(addContact(contact));
-      });
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
     if (contacts.length > 0) {
       localStorage.setItem("contacts", JSON.stringify(contacts));
     }
