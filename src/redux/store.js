@@ -20,7 +20,6 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        // Отключаем проверку на несериализуемые данные для redux-persist
         ignoredActions: ["persist/PERSIST"],
       },
     }),

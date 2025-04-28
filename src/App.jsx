@@ -11,7 +11,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector((state) => state.contacts.items);
-  const filter = useSelector((state) => state.filter.filterValue); // исправлено на filterValue
+  const filter = useSelector((state) => state.filter.filterValue);
 
   const filteredContacts = contacts
     ? contacts.filter((contact) =>
@@ -35,17 +35,10 @@ const App = () => {
     const savedContacts = JSON.parse(localStorage.getItem("contacts"));
     if (savedContacts && Array.isArray(savedContacts)) {
       savedContacts.forEach((contact) => {
-        const contactExists = contacts.some(
-          (existingContact) =>
-            existingContact.name === contact.name ||
-            existingContact.number === contact.number
-        );
-        if (!contactExists) {
-          dispatch(addContact(contact));
-        }
+        dispatch(addContact(contact));
       });
     }
-  }, [dispatch, contacts]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (contacts.length > 0) {

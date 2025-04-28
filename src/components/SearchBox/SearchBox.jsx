@@ -12,7 +12,7 @@ const SearchBox = () => {
     <input
       type="text"
       placeholder="find contact by name"
-      onChange={(e) => dispatch(changeFilter(e.target.value))}
+      onChange={handleChange}
     />
   );
 };
